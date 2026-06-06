@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { Router } from "express";
 import { clearAuthCookie, createAuthToken, requireAuth, setAuthCookie } from "../auth.js";
+import { getDatabaseStatus } from "../db.js";
 import { sendMagicLink } from "../email.js";
 import { LoginToken, User } from "../models/index.js";
 
@@ -28,8 +29,24 @@ function serializeUser(user) {
   };
 }
 
+function requireDatabaseConnection(response) {
+  if (getDatabaseStatus() === "connected") {
+    return true;
+  }
+
+  response.status(503).json({
+    message: "MongoDB is not connected. Check your Atlas Network Access IP whitelist and restart the API.",
+    database: "disconnected"
+  });
+  return false;
+}
+
 authRouter.post("/magic-link", async (request, response, next) => {
   try {
+    if (!requireDatabaseConnection(response)) {
+      return;
+    }
+
     const email = normalizeEmail(request.body.email);
     const displayName = request.body.displayName?.trim();
 
@@ -63,6 +80,10 @@ authRouter.post("/magic-link", async (request, response, next) => {
 
 authRouter.post("/verify", async (request, response, next) => {
   try {
+    if (!requireDatabaseConnection(response)) {
+      return;
+    }
+
     const rawToken = request.body.token;
 
     if (!rawToken) {
@@ -115,6 +136,10 @@ authRouter.post("/logout", (_request, response) => {
 
 authRouter.get("/me", requireAuth, async (request, response, next) => {
   try {
+    if (!requireDatabaseConnection(response)) {
+      return;
+    }
+
     const user = await User.findById(request.auth.sub);
 
     if (!user) {
