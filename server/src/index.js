@@ -1,7 +1,10 @@
 import "dotenv/config";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
+import { requireAuth } from "./auth.js";
 import { connectDatabase, getDatabaseStatus } from "./db.js";
+import { authRouter } from "./routes/auth.js";
 import { helloRouter } from "./routes/hello.js";
 
 const app = express();
@@ -13,6 +16,7 @@ const clientOrigins = (process.env.CLIENT_ORIGIN ?? "http://localhost:5173")
 
 app.use(
   cors({
+    credentials: true,
     origin(origin, callback) {
       const isLocalViteOrigin = /^http:\/\/(localhost|127\.0\.0\.1):517\d$/.test(origin ?? "");
 
@@ -25,6 +29,7 @@ app.use(
     }
   })
 );
+app.use(cookieParser());
 app.use(express.json());
 
 app.get("/api/health", (_request, response) => {
@@ -34,7 +39,8 @@ app.get("/api/health", (_request, response) => {
   });
 });
 
-app.use("/api/hello", helloRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/hello", requireAuth, helloRouter);
 
 app.use((error, _request, response, _next) => {
   response.status(500).json({

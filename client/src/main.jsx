@@ -1,65 +1,67 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { apiRequest } from "./api/apiRequest.js";
+import { AuthForm } from "./components/AuthForm/index.js";
+import { GlobalLeaderboard } from "./components/GlobalLeaderboard/index.js";
+import { Layout } from "./components/Layout/index.js";
 import "./styles.css";
 
-const apiUrl = import.meta.env.VITE_API_URL ?? "http://localhost:3001";
-
 function App() {
-  const [apiState, setApiState] = useState({
-    status: "loading",
-    database: "checking",
-    message: "Loading from the MERN API..."
-  });
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingMessage, setLoadingMessage] = useState("Checking your session...");
 
   useEffect(() => {
-    async function loadHelloWorld() {
-      try {
-        const response = await fetch(`${apiUrl}/api/hello`);
+    async function loadCurrentUser() {
+      const loginToken = new URLSearchParams(window.location.search).get("token");
 
-        if (!response.ok) {
-          throw new Error(`API responded with ${response.status}`);
+      try {
+        if (window.location.pathname === "/auth/verify" && loginToken) {
+          setLoadingMessage("Signing you in...");
+          const data = await apiRequest("/api/auth/verify", {
+            method: "POST",
+            body: JSON.stringify({ token: loginToken })
+          });
+
+          window.history.replaceState({}, "", "/");
+          setUser(data.user);
+          return;
         }
 
-        const data = await response.json();
-        setApiState({
-          status: "online",
-          database: data.database,
-          message: data.message
-        });
-      } catch (error) {
-        setApiState({
-          status: "offline",
-          database: "disconnected",
-          message: error.message
-        });
+        const data = await apiRequest("/api/auth/me");
+        setUser(data.user);
+      } catch (_error) {
+        setUser(null);
+      } finally {
+        setIsLoading(false);
       }
     }
 
-    loadHelloWorld();
+    loadCurrentUser();
   }, []);
 
-  const isConnected = apiState.database === "connected";
+  async function handleLogout() {
+    await apiRequest("/api/auth/logout", { method: "POST" });
+    setUser(null);
+  }
+
+  if (isLoading) {
+    return (
+      <main className="app-shell">
+        <section className="loading-panel">{loadingMessage}</section>
+      </main>
+    );
+  }
 
   return (
-    <main className="app-shell">
-      <section className="hello-panel" aria-label="MERN hello world">
-        <div className="status-row">
-          <span className={isConnected ? "status-dot connected" : "status-dot"} />
-          <span>API {apiState.status}</span>
-          <span>MongoDB {apiState.database}</span>
-        </div>
-
-        <h1>Hello, MERN.</h1>
-        <p className="lead">
-          React is rendering this page, Express is serving the API, Node is running the server,
-          and MongoDB is wired through Mongoose.
-        </p>
-
-        <div className="message-box">
-          <span>Database message</span>
-          <p>{apiState.message}</p>
-        </div>
-      </section>
+    <main className={user ? "authenticated-shell" : "app-shell"}>
+      {user ? (
+        <Layout title="Leaderboard" user={user} onLogout={handleLogout}>
+          <GlobalLeaderboard />
+        </Layout>
+      ) : (
+        <AuthForm />
+      )}
     </main>
   );
 }
