@@ -60,7 +60,7 @@
 .layout-header h2 {
   margin: 0;
   color: #17201d;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: 2.35rem;
   line-height: 1;
 }
 
@@ -69,20 +69,43 @@
   padding-top: 28px;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .layout-shell {
     grid-template-columns: 1fr;
   }
 
   .layout-brand {
-    min-height: 220px;
+    min-height: 0;
+    padding: 24px;
+  }
+
+  .layout-brand h1 {
+    margin-bottom: 22px;
+    font-size: 3.4rem;
+  }
+
+  .layout-nav {
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .layout-main {
     min-height: auto;
+    padding: 24px;
   }
+}
 
+@media (max-width: 560px) {
   .layout-header {
     display: grid;
+    gap: 16px;
+  }
+
+  .layout-header h2 {
+    font-size: 2rem;
+  }
+
+  .layout-content {
+    padding-top: 20px;
   }
 }

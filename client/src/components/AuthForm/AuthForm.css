@@ -80,5 +80,17 @@
 @media (max-width: 760px) {
   .auth-panel {
     grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .auth-form {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 420px) {
+  .auth-panel {
+    padding: 18px;
   }
 }

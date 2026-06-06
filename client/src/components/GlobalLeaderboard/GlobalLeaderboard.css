@@ -6,7 +6,7 @@
 .leaderboard-heading h2 {
   margin: 0;
   color: #17201d;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: 2rem;
   line-height: 1;
 }
 
@@ -91,18 +91,75 @@
   background: #edf0ee;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1200px) {
   .leaderboard-row {
-    grid-template-columns: 24px 38px minmax(0, 1fr);
+    grid-template-columns: 24px 38px minmax(0, 1fr) auto;
+    gap: 8px;
   }
 
-  .leaderboard-points,
   .leaderboard-movement {
-    grid-column: 3;
+    grid-column: 3 / 5;
     justify-self: start;
   }
 
   .leaderboard-points {
     font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .leaderboard-row {
+    grid-template-columns: 28px 42px minmax(0, 1fr) 54px 76px;
+    gap: 10px;
+  }
+
+  .leaderboard-movement {
+    grid-column: auto;
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 560px) {
+  .global-leaderboard {
+    gap: 18px;
+  }
+
+  .leaderboard-heading h2 {
+    font-size: 1.7rem;
+  }
+
+  .leaderboard-row {
+    grid-template-columns: 24px 40px minmax(0, 1fr) auto;
+    align-items: center;
+    min-height: 74px;
+    padding: 10px;
+  }
+
+  .leaderboard-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .leaderboard-user {
+    grid-column: 3 / 5;
+  }
+
+  .leaderboard-points {
+    grid-column: 3;
+    grid-row: 2;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .leaderboard-points::after {
+    content: " pts";
+    color: #66736f;
+    font-size: 0.78rem;
+  }
+
+  .leaderboard-movement {
+    grid-column: 4;
+    grid-row: 2;
+    justify-self: end;
   }
 }

@@ -1,6 +1,7 @@
 .account-menu {
   position: relative;
   z-index: 2;
+  justify-self: end;
 }
 
 .account-trigger {
@@ -82,4 +83,23 @@
 .menu-item:focus {
   background: #fff2ea;
   outline: none;
+}
+
+@media (max-width: 560px) {
+  .account-menu {
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .account-trigger {
+    justify-content: space-between;
+    width: 100%;
+    max-width: none;
+  }
+
+  .account-dropdown {
+    left: 0;
+    right: auto;
+    width: 100%;
+  }
 }
