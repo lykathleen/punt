@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { isSupabaseConfigured, supabase } from "../../supabase.js";
 import "./AuthForm.css";
+
+const resendCooldownMs = 60 * 1000;
 
 export function AuthForm() {
   const [form, setForm] = useState({
@@ -10,6 +12,7 @@ export function AuthForm() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitLock = useRef(false);
 
   function updateField(event) {
     setForm((currentForm) => ({
@@ -20,13 +23,27 @@ export function AuthForm() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    if (submitLock.current) {
+      return;
+    }
+
     setError("");
     setMessage("");
     setIsSubmitting(true);
+    submitLock.current = true;
 
     try {
       if (!isSupabaseConfigured) {
         throw new Error("Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to the client environment.");
+      }
+
+      const lastRequestAt = Number(window.localStorage.getItem("punt_last_magic_link_request") ?? 0);
+      const cooldownRemainingMs = resendCooldownMs - (Date.now() - lastRequestAt);
+
+      if (cooldownRemainingMs > 0) {
+        const seconds = Math.ceil(cooldownRemainingMs / 1000);
+        throw new Error(`Please wait ${seconds}s before requesting another login link.`);
       }
 
       const { error: signInError } = await supabase.auth.signInWithOtp({
@@ -43,11 +60,13 @@ export function AuthForm() {
         throw signInError;
       }
 
+      window.localStorage.setItem("punt_last_magic_link_request", String(Date.now()));
       setMessage("Check your email for your secure login link.");
     } catch (requestError) {
       setError(requestError.message);
     } finally {
       setIsSubmitting(false);
+      submitLock.current = false;
     }
   }
 
