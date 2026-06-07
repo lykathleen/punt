@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { supabase } from "../../supabase.js";
+import { isSupabaseConfigured, supabase } from "../../supabase.js";
 import "./AuthForm.css";
 
 export function AuthForm() {
@@ -25,6 +25,10 @@ export function AuthForm() {
     setIsSubmitting(true);
 
     try {
+      if (!isSupabaseConfigured) {
+        throw new Error("Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to the client environment.");
+      }
+
       const { error: signInError } = await supabase.auth.signInWithOtp({
         email: form.email,
         options: {
@@ -63,6 +67,13 @@ export function AuthForm() {
           <h2>Log in with email</h2>
           <p>New users are created automatically the first time they use a valid link.</p>
         </div>
+
+        {!isSupabaseConfigured && (
+          <p className="form-error">
+            Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to the
+            client environment, then redeploy.
+          </p>
+        )}
 
         <label>
           Display name

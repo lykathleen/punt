@@ -5,7 +5,7 @@ import { AuthForm } from "./components/AuthForm/index.js";
 import { GlobalLeaderboard } from "./components/GlobalLeaderboard/index.js";
 import { Layout } from "./components/Layout/index.js";
 import { RoundCards } from "./components/RoundCards/index.js";
-import { supabase } from "./supabase.js";
+import { isSupabaseConfigured, supabase } from "./supabase.js";
 import "./styles.css";
 
 function App() {
@@ -36,6 +36,12 @@ function App() {
 
     async function loadCurrentUser() {
       try {
+        if (!isSupabaseConfigured) {
+          setLoadingMessage("Supabase client environment is missing.");
+          setUser(null);
+          return;
+        }
+
         const { data } = await supabase.auth.getSession();
         await loadApplicationUser(data.session);
       } catch (_error) {
@@ -51,25 +57,25 @@ function App() {
 
     loadCurrentUser();
 
-    const {
-      data: { subscription }
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setLoadingMessage("Signing you in...");
-      loadApplicationUser(session).finally(() => {
-        if (isMounted) {
-          setIsLoading(false);
-        }
-      });
-    });
+    const subscription = isSupabaseConfigured
+      ? supabase.auth.onAuthStateChange((_event, session) => {
+          setLoadingMessage("Signing you in...");
+          loadApplicationUser(session).finally(() => {
+            if (isMounted) {
+              setIsLoading(false);
+            }
+          });
+        }).data.subscription
+      : null;
 
     return () => {
       isMounted = false;
-      subscription.unsubscribe();
+      subscription?.unsubscribe();
     };
   }, []);
 
   async function handleLogout() {
-    await supabase.auth.signOut();
+    await supabase?.auth.signOut();
     setUser(null);
   }
 

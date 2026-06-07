@@ -3,7 +3,9 @@ import { supabase } from "../supabase.js";
 const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 export async function apiRequest(path, options = {}) {
-  const { data: sessionData } = await supabase.auth.getSession();
+  const { data: sessionData } = supabase
+    ? await supabase.auth.getSession()
+    : { data: { session: null } };
   const accessToken = sessionData.session?.access_token;
 
   const response = await fetch(`${apiUrl}${path}`, {
