@@ -1,50 +1,55 @@
-import jwt from "jsonwebtoken";
+import { createClient } from "@supabase/supabase-js";
 
-const authCookieName = "punt_token";
-const jwtSecret = process.env.JWT_SECRET ?? "development-only-change-me";
-const tokenMaxAgeMs = 7 * 24 * 60 * 60 * 1000;
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
-export function createAuthToken(user) {
-  return jwt.sign(
-    {
-      sub: user._id.toString(),
-      email: user.email
-    },
-    jwtSecret,
-    { expiresIn: "7d" }
-  );
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn("Missing SUPABASE_URL or SUPABASE_ANON_KEY. Protected routes will reject requests.");
 }
 
-export function setAuthCookie(response, token) {
-  response.cookie(authCookieName, token, {
-    httpOnly: true,
-    maxAge: tokenMaxAgeMs,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production"
-  });
-}
+const supabase = supabaseUrl && supabaseAnonKey
+  ? createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+        persistSession: false
+      }
+    })
+  : null;
 
-export function clearAuthCookie(response) {
-  response.clearCookie(authCookieName, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production"
-  });
-}
+function getBearerToken(request) {
+  const [scheme, token] = (request.headers.authorization ?? "").split(" ");
 
-export function requireAuth(request, response, next) {
-  const token = request.cookies?.[authCookieName];
-
-  if (!token) {
-    response.status(401).json({ message: "You need to log in first." });
-    return;
+  if (scheme?.toLowerCase() !== "bearer" || !token) {
+    return null;
   }
 
+  return token;
+}
+
+export async function requireAuth(request, response, next) {
   try {
-    request.auth = jwt.verify(token, jwtSecret);
+    const token = getBearerToken(request);
+
+    if (!token || !supabase) {
+      response.status(401).json({ message: "You need to log in first." });
+      return;
+    }
+
+    const { data, error } = await supabase.auth.getUser(token);
+
+    if (error || !data.user) {
+      response.status(401).json({ message: "Your session has expired. Please log in again." });
+      return;
+    }
+
+    request.auth = {
+      sub: data.user.id,
+      email: data.user.email,
+      user: data.user
+    };
     next();
-  } catch (_error) {
-    clearAuthCookie(response);
-    response.status(401).json({ message: "Your session has expired. Please log in again." });
+  } catch (error) {
+    next(error);
   }
 }

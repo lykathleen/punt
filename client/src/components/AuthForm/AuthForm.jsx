@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { apiRequest } from "../../api/apiRequest.js";
+import { supabase } from "../../supabase.js";
 import "./AuthForm.css";
 
 export function AuthForm() {
@@ -25,12 +25,21 @@ export function AuthForm() {
     setIsSubmitting(true);
 
     try {
-      const data = await apiRequest("/api/auth/magic-link", {
-        method: "POST",
-        body: JSON.stringify(form)
+      const { error: signInError } = await supabase.auth.signInWithOtp({
+        email: form.email,
+        options: {
+          emailRedirectTo: window.location.origin,
+          data: {
+            display_name: form.displayName.trim()
+          }
+        }
       });
 
-      setMessage(data.message);
+      if (signInError) {
+        throw signInError;
+      }
+
+      setMessage("Check your email for your secure login link.");
     } catch (requestError) {
       setError(requestError.message);
     } finally {

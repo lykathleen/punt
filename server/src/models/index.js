@@ -1,7 +1,6 @@
 export { Competition } from "./Competition.js";
 export { LeaderboardCurrent } from "./LeaderboardCurrent.js";
 export { LeaderboardSnapshot } from "./LeaderboardSnapshot.js";
-export { LoginToken } from "./LoginToken.js";
 export { Match } from "./Match.js";
 export { Prediction } from "./Prediction.js";
 export { ScoringEvent } from "./ScoringEvent.js";

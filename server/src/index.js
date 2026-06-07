@@ -1,5 +1,4 @@
 import "dotenv/config";
-import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { requireAuth } from "./auth.js";
@@ -30,7 +29,6 @@ app.use(
     }
   })
 );
-app.use(cookieParser());
 app.use(express.json());
 
 app.get("/api/health", (_request, response) => {

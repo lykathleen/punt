@@ -14,6 +14,11 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       trim: true
     },
+    supabaseUserId: {
+      type: String,
+      unique: true,
+      sparse: true
+    },
     totalPointsByCompetition: {
       type: Map,
       of: Number,
