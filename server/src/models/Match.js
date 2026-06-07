@@ -2,14 +2,23 @@ import mongoose from "mongoose";
 
 const matchSchema = new mongoose.Schema(
   {
+    externalId: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true
+    },
     competitionId: {
       type: String,
       required: true
     },
     stage: String,
+    venue: String,
     round: {
+      externalId: Number,
       name: String,
-      number: Number
+      number: Number,
+      short: String
     },
     kickoffTime: {
       type: Date,
@@ -22,11 +31,11 @@ const matchSchema = new mongoose.Schema(
     },
     homeTeamId: {
       type: String,
-      required: true
+      default: null
     },
     awayTeamId: {
       type: String,
-      required: true
+      default: null
     },
     score: {
       home: Number,

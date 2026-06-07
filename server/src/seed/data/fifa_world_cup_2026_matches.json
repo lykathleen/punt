@@ -1,0 +1,420 @@
+{
+  "rounds": [
+    {
+      "_id": 1,
+      "name": "Round of 32",
+      "short": "R32"
+    },
+    {
+      "_id": 2,
+      "name": "Round of 16",
+      "short": "R16"
+    },
+    {
+      "_id": 3,
+      "name": "Quarter-finals",
+      "short": "QF"
+    },
+    {
+      "_id": 4,
+      "name": "Semi-finals",
+      "short": "SF"
+    },
+    {
+      "_id": 5,
+      "name": "Third Place",
+      "short": "3PO"
+    },
+    {
+      "_id": 6,
+      "name": "Final",
+      "short": "F"
+    }
+  ],
+  "matches": [
+    {
+      "_id": "M73",
+      "round_id": 1,
+      "timestamp": "2026-06-28T19:00:00Z",
+      "venue": "SoFi Stadium, Los Angeles",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M74",
+      "round_id": 1,
+      "timestamp": "2026-06-29T17:00:00Z",
+      "venue": "Gillette Stadium, Boston",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M75",
+      "round_id": 1,
+      "timestamp": "2026-06-29T18:00:00Z",
+      "venue": "Estadio BBVA, Monterrey",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M76",
+      "round_id": 1,
+      "timestamp": "2026-06-29T18:00:00Z",
+      "venue": "NRG Stadium, Houston",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M77",
+      "round_id": 1,
+      "timestamp": "2026-06-30T21:00:00Z",
+      "venue": "MetLife Stadium, New York/New Jersey",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M78",
+      "round_id": 1,
+      "timestamp": "2026-06-30T18:00:00Z",
+      "venue": "AT&T Stadium, Dallas",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M79",
+      "round_id": 1,
+      "timestamp": "2026-07-01T01:00:00Z",
+      "venue": "Estadio Azteca, Mexico City",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M80",
+      "round_id": 1,
+      "timestamp": "2026-07-01T17:00:00Z",
+      "venue": "Mercedes-Benz Stadium, Atlanta",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M81",
+      "round_id": 1,
+      "timestamp": "2026-07-02T01:00:00Z",
+      "venue": "Levi's Stadium, San Francisco Bay Area",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M82",
+      "round_id": 1,
+      "timestamp": "2026-07-02T01:00:00Z",
+      "venue": "Lumen Field, Seattle",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M83",
+      "round_id": 1,
+      "timestamp": "2026-07-02T23:00:00Z",
+      "venue": "BMO Field, Toronto",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M84",
+      "round_id": 1,
+      "timestamp": "2026-07-03T00:00:00Z",
+      "venue": "SoFi Stadium, Los Angeles",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M85",
+      "round_id": 1,
+      "timestamp": "2026-07-03T08:00:00Z",
+      "venue": "BC Place, Vancouver",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M86",
+      "round_id": 1,
+      "timestamp": "2026-07-03T23:00:00Z",
+      "venue": "Hard Rock Stadium, Miami",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M87",
+      "round_id": 1,
+      "timestamp": "2026-07-04T01:30:00Z",
+      "venue": "Arrowhead Stadium, Kansas City",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M88",
+      "round_id": 1,
+      "timestamp": "2026-07-04T00:00:00Z",
+      "venue": "AT&T Stadium, Dallas",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M89",
+      "round_id": 2,
+      "timestamp": "2026-07-04T17:00:00Z",
+      "venue": "NRG Stadium, Houston",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M90",
+      "round_id": 2,
+      "timestamp": "2026-07-04T21:00:00Z",
+      "venue": "Lincoln Financial Field, Philadelphia",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M91",
+      "round_id": 2,
+      "timestamp": "2026-07-05T20:00:00Z",
+      "venue": "MetLife Stadium, New York/New Jersey",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M92",
+      "round_id": 2,
+      "timestamp": "2026-07-06T00:00:00Z",
+      "venue": "Estadio Azteca, Mexico City",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M93",
+      "round_id": 2,
+      "timestamp": "2026-07-06T19:00:00Z",
+      "venue": "AT&T Stadium, Dallas",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M94",
+      "round_id": 2,
+      "timestamp": "2026-07-07T00:00:00Z",
+      "venue": "Lumen Field, Seattle",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M95",
+      "round_id": 2,
+      "timestamp": "2026-07-07T16:00:00Z",
+      "venue": "Mercedes-Benz Stadium, Atlanta",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M96",
+      "round_id": 2,
+      "timestamp": "2026-07-07T20:00:00Z",
+      "venue": "BC Place, Vancouver",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M97",
+      "round_id": 3,
+      "timestamp": "2026-07-09T20:00:00Z",
+      "venue": "Gillette Stadium, Boston",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M98",
+      "round_id": 3,
+      "timestamp": "2026-07-10T19:00:00Z",
+      "venue": "SoFi Stadium, Los Angeles",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M99",
+      "round_id": 3,
+      "timestamp": "2026-07-11T21:00:00Z",
+      "venue": "Hard Rock Stadium, Miami",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M100",
+      "round_id": 3,
+      "timestamp": "2026-07-12T01:00:00Z",
+      "venue": "Arrowhead Stadium, Kansas City",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M101",
+      "round_id": 4,
+      "timestamp": "2026-07-14T19:00:00Z",
+      "venue": "AT&T Stadium, Dallas",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M102",
+      "round_id": 4,
+      "timestamp": "2026-07-15T19:00:00Z",
+      "venue": "Mercedes-Benz Stadium, Atlanta",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M103",
+      "round_id": 5,
+      "timestamp": "2026-07-18T21:00:00Z",
+      "venue": "Hard Rock Stadium, Miami",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    },
+    {
+      "_id": "M104",
+      "round_id": 6,
+      "timestamp": "2026-07-19T19:00:00Z",
+      "venue": "MetLife Stadium, New York/New Jersey",
+      "home_team_id": null,
+      "away_team_id": null,
+      "home_score": null,
+      "away_score": null,
+      "competition_id": 1,
+      "status": "upcoming"
+    }
+  ]
+}

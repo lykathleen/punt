@@ -20,6 +20,7 @@ client/                 React + Vite app
 server/                 Express API
 server/src/models/      Mongoose models
 server/src/routes/      API routes
+server/src/seed/        Fixture seed scripts and data
 ```
 
 The main domain models live in `server/src/models`:
@@ -91,15 +92,34 @@ Current scaffold endpoints:
 - `POST /api/auth/verify` verifies a magic link and starts a session
 - `POST /api/auth/logout` ends the current session
 - `GET /api/auth/me` returns the logged-in user
+- `GET /api/fixtures/rounds` returns seeded rounds and matches for the logged-in user
 - `GET /api/hello` returns a simple protected API response and database connection status
 
 The next backend step is to add routes for competitions, teams, matches, predictions, and
 leaderboards.
+
+## Fixture Data
+
+World Cup 2026 fixture JSON lives in:
+
+```text
+server/src/seed/data/
+```
+
+To import the fixture data into MongoDB:
+
+```bash
+npm run seed:fixtures
+```
+
+The seed script upserts the FIFA World Cup 2026 competition, teams, and matches, so it is safe to
+run more than once.
 
 ## Useful Scripts
 
 ```bash
 npm run dev      # start client and server
 npm run build    # build the React client
+npm run seed:fixtures # import fixture seed data into MongoDB
 npm start        # start the Express server
 ```

@@ -10,7 +10,7 @@ const leaderboardRows = [
   },
   {
     id: "2",
-    username: "Alex",
+    username: "Alice",
     points: 43,
     roundMovement: -1
   },
@@ -46,14 +46,14 @@ function getInitials(username) {
 
 function getMovementLabel(roundMovement) {
   if (roundMovement > 0) {
-    return `Up ${roundMovement}`;
+    return `${roundMovement}`;
   }
 
   if (roundMovement < 0) {
-    return `Down ${Math.abs(roundMovement)}`;
+    return `${Math.abs(roundMovement)}`;
   }
 
-  return "No change";
+  return "-";
 }
 
 export function GlobalLeaderboard() {

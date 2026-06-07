@@ -4,6 +4,7 @@ import { apiRequest } from "./api/apiRequest.js";
 import { AuthForm } from "./components/AuthForm/index.js";
 import { GlobalLeaderboard } from "./components/GlobalLeaderboard/index.js";
 import { Layout } from "./components/Layout/index.js";
+import { RoundCards } from "./components/RoundCards/index.js";
 import "./styles.css";
 
 function App() {
@@ -56,9 +57,13 @@ function App() {
   return (
     <main className={user ? "authenticated-shell" : "app-shell"}>
       {user ? (
-        <Layout title="Leaderboard" user={user} onLogout={handleLogout}>
-          <GlobalLeaderboard />
-        </Layout>
+        <Layout
+          primary={<RoundCards />}
+          secondary={<GlobalLeaderboard />}
+          title="Leaderboard"
+          user={user}
+          onLogout={handleLogout}
+        />
       ) : (
         <AuthForm />
       )}

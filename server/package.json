@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node src/index.js",
+    "seed:fixtures": "node src/seed/importFixtures.js",
     "start": "node src/index.js"
   },
   "dependencies": {

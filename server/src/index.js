@@ -5,6 +5,7 @@ import express from "express";
 import { requireAuth } from "./auth.js";
 import { connectDatabase, getDatabaseStatus } from "./db.js";
 import { authRouter } from "./routes/auth.js";
+import { fixturesRouter } from "./routes/fixtures.js";
 import { helloRouter } from "./routes/hello.js";
 
 const app = express();
@@ -40,6 +41,7 @@ app.get("/api/health", (_request, response) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api/fixtures", requireAuth, fixturesRouter);
 app.use("/api/hello", requireAuth, helloRouter);
 
 app.use((error, _request, response, _next) => {

@@ -4,14 +4,26 @@
   min-height: 100vh;
 }
 
+.layout-primary {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  min-height: 100vh;
+  padding: clamp(24px, 4vw, 42px);
+  background:
+    linear-gradient(rgba(23, 32, 29, 0.68), rgba(23, 32, 29, 0.76)),
+    linear-gradient(135deg, #74877d 0%, #ced7d0 100%);
+}
+
 .layout-brand {
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
-  min-height: 100vh;
-  padding: clamp(28px, 5vw, 56px);
+  gap: 20px;
+  min-width: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  padding-bottom: 22px;
   color: #f8f4ea;
-  background: #17201d;
 }
 
 .layout-brand .eyebrow {
@@ -19,7 +31,9 @@
 }
 
 .layout-brand h1 {
+  margin-bottom: 0;
   color: #ffffff;
+  font-size: 4rem;
 }
 
 .layout-nav {
@@ -69,18 +83,26 @@
   padding-top: 28px;
 }
 
+.layout-primary-content {
+  min-width: 0;
+  padding-top: 28px;
+}
+
 @media (max-width: 900px) {
   .layout-shell {
     grid-template-columns: 1fr;
   }
 
-  .layout-brand {
+  .layout-primary {
     min-height: 0;
     padding: 24px;
   }
 
+  .layout-brand {
+    align-items: flex-start;
+  }
+
   .layout-brand h1 {
-    margin-bottom: 22px;
     font-size: 3.4rem;
   }
 
@@ -99,6 +121,10 @@
   .layout-header {
     display: grid;
     gap: 16px;
+  }
+
+  .layout-brand {
+    display: grid;
   }
 
   .layout-header h2 {
