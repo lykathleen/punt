@@ -68,10 +68,11 @@ export function GlobalLeaderboard() {
         {leaderboardRows.map((row, index) => {
           const movementClass =
             row.roundMovement > 0 ? "is-up" : row.roundMovement < 0 ? "is-down" : "is-level";
+          const rankClass = index < 3 ? ` is-rank-${index + 1}` : "";
 
           return (
             <li className="leaderboard-row" key={row.id}>
-              <span className="leaderboard-rank">{index + 1}</span>
+              <span className={`leaderboard-rank${rankClass}`}>{index + 1}</span>
               <span className="leaderboard-avatar" aria-hidden="true">
                 {getInitials(row.username)}
               </span>

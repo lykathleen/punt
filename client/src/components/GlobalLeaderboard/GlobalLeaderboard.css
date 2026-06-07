@@ -1,18 +1,24 @@
 .global-leaderboard {
   display: grid;
-  gap: 22px;
+  gap: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 18px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
 }
 
 .leaderboard-heading h2 {
   margin: 0;
-  color: #17201d;
-  font-size: 2rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 800;
   line-height: 1;
 }
 
 .leaderboard-list {
   display: grid;
-  gap: 10px;
+  gap: 4px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -20,47 +26,77 @@
 
 .leaderboard-row {
   display: grid;
-  grid-template-columns: 28px 42px minmax(0, 1fr) 54px 76px;
+  grid-template-columns: 26px 34px minmax(0, 1fr) 44px 34px;
   align-items: center;
-  gap: 10px;
-  min-height: 62px;
-  border: 1px solid rgba(24, 33, 31, 0.12);
-  border-radius: 8px;
-  padding: 10px;
-  background: #ffffff;
+  gap: 9px;
+  min-height: 46px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  padding: 7px 9px;
+  background: transparent;
+}
+
+.leaderboard-row:first-child {
+  background: var(--gold-row-bg);
+  border-color: var(--gold-row-border);
 }
 
 .leaderboard-rank {
-  color: #66736f;
-  font-size: 0.88rem;
-  font-weight: 900;
-  text-align: center;
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-2);
+  background: var(--surface-2);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.leaderboard-rank.is-rank-1 {
+  border-color: #f5c451;
+  color: #1f1503;
+  background: linear-gradient(145deg, #ffe28a, #f5c451 60%, #b87a11);
+}
+
+.leaderboard-rank.is-rank-2 {
+  border-color: #cfd6df;
+  color: #18202a;
+  background: linear-gradient(145deg, #f3f6f9, #cfd6df 58%, #8f9baa);
+}
+
+.leaderboard-rank.is-rank-3 {
+  border-color: #c98749;
+  color: #241407;
+  background: linear-gradient(145deg, #f1b77d, #c98749 58%, #855026);
 }
 
 .leaderboard-avatar {
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 34px;
+  height: 34px;
   place-items: center;
   border-radius: 999px;
   color: #ffffff;
-  background: #2f6f58;
-  font-size: 0.86rem;
+  background: var(--you);
+  font-size: 0.72rem;
   font-weight: 900;
 }
 
 .leaderboard-user {
   min-width: 0;
   overflow: hidden;
-  color: #17201d;
-  font-weight: 900;
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 700;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .leaderboard-points {
-  color: #17201d;
-  font-size: 1.08rem;
+  color: var(--text);
+  font-size: 0.96rem;
   font-weight: 900;
   text-align: right;
 }
@@ -70,10 +106,10 @@
   align-items: center;
   gap: 5px;
   justify-content: center;
-  min-height: 28px;
-  border-radius: 999px;
-  padding: 6px 8px;
-  font-size: 0.75rem;
+  min-height: 24px;
+  border-radius: var(--r-pill);
+  padding: 4px 7px;
+  font-size: 0.7rem;
   font-weight: 900;
   white-space: nowrap;
 }
@@ -97,89 +133,26 @@
 }
 
 .leaderboard-movement.is-up {
-  color: #295346;
-  background: #ecf8f2;
+  color: var(--accent);
+  background: var(--accent-bg);
 }
 
 .leaderboard-movement.is-down {
-  color: #8a3b24;
-  background: #fff2ea;
+  color: var(--danger);
+  background: var(--danger-bg);
 }
 
 .leaderboard-movement.is-level {
-  color: #4c5b56;
-  background: #edf0ee;
-}
-
-@media (max-width: 1200px) {
-  .leaderboard-row {
-    grid-template-columns: 24px 38px minmax(0, 1fr) auto;
-    gap: 8px;
-  }
-
-  .leaderboard-movement {
-    grid-column: 3 / 5;
-    justify-self: start;
-  }
-
-  .leaderboard-points {
-    font-size: 0.92rem;
-  }
-}
-
-@media (max-width: 900px) {
-  .leaderboard-row {
-    grid-template-columns: 28px 42px minmax(0, 1fr) 54px 76px;
-    gap: 10px;
-  }
-
-  .leaderboard-movement {
-    grid-column: auto;
-    justify-self: stretch;
-  }
+  color: var(--text-3);
+  background: var(--surface-2);
 }
 
 @media (max-width: 560px) {
-  .global-leaderboard {
-    gap: 18px;
-  }
-
-  .leaderboard-heading h2 {
-    font-size: 1.7rem;
-  }
-
   .leaderboard-row {
-    grid-template-columns: 24px 40px minmax(0, 1fr) auto;
-    align-items: center;
-    min-height: 74px;
-    padding: 10px;
-  }
-
-  .leaderboard-avatar {
-    width: 40px;
-    height: 40px;
-  }
-
-  .leaderboard-user {
-    grid-column: 3 / 5;
-  }
-
-  .leaderboard-points {
-    grid-column: 3;
-    grid-row: 2;
-    justify-self: start;
-    text-align: left;
-  }
-
-  .leaderboard-points::after {
-    content: " pts";
-    color: #66736f;
-    font-size: 0.78rem;
+    grid-template-columns: 26px 34px minmax(0, 1fr) auto;
   }
 
   .leaderboard-movement {
     grid-column: 4;
-    grid-row: 2;
-    justify-self: end;
   }
 }
