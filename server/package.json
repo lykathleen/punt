@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "node --check src/index.js",
     "dev": "node src/index.js",
     "seed:fixtures": "node src/seed/importFixtures.js",
     "start": "node src/index.js"
